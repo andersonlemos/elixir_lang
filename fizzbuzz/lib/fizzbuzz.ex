@@ -8,19 +8,22 @@ defmodule Fizzbuzz do
   defp handle_file_read({:ok, result}) do
     result =
       result
-    |> String.split(",")
-    |> Enum.map(&convert_and_evaluate_numbers/1)
+      |> String.split(",")
+      |> Enum.map(&convert_and_evaluate_numbers/1)
 
-   {:ok, result}
+    {:ok, result}
   end
+
   defp handle_file_read({:error, reason}), do: {:error, "Error reading file: #{reason}"}
+
   defp convert_and_evaluate_numbers(elem) do
     elem
     |> String.to_integer()
     |> evaluate_numbers()
   end
-  defp evaluate_numbers(number) when rem(number,15) == 0, do: :fizzbuzz
-  defp evaluate_numbers(number) when rem(number,3) == 0, do: :fizz
-  defp evaluate_numbers(number) when rem(number,5) == 0, do: :buzz
-  defp evaluate_numbers(number) , do: number
+
+  defp evaluate_numbers(number) when rem(number, 15) == 0, do: :fizzbuzz
+  defp evaluate_numbers(number) when rem(number, 3) == 0, do: :fizz
+  defp evaluate_numbers(number) when rem(number, 5) == 0, do: :buzz
+  defp evaluate_numbers(number), do: number
 end
